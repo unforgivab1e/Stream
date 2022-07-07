@@ -30,14 +30,14 @@ public class Main {
         students.stream().filter(student -> student.getName().contains("风")).collect(Collectors.toList()).forEach(student -> System.out.println(student) );
         System.out.println("------------------------------------");
 
-        students.stream().filter(student -> student.getBrith().contains("1990")).collect(Collectors.toList()).forEach(student -> System.out.println(student));
+        students.stream().filter(student -> student.getBrith().get(Calendar.YEAR)==1990).collect(Collectors.toList()).forEach(student -> System.out.println(student));
         System.out.println("------------------------------------");
 
-        students.stream().collect(Collectors.groupingBy(student -> student.getBrith().split("-")[0], Collectors.counting())).forEach((s, aLong) -> System.out.print(s+"数量是"+aLong+" "));
+        students.stream().collect(Collectors.groupingBy(student -> student.getBrith().get(Calendar.YEAR), Collectors.counting())).forEach((s, aLong) -> System.out.print(s+"数量是"+aLong+" "));
         System.out.println("");
         System.out.println("--------------------------------------");
 
-        students.stream().filter(student -> Integer.valueOf(student.getBrith().split("-")[1]).equals(Calendar.getInstance().get(Calendar.MONTH)+2)).forEach(student -> System.out.println(student));
+        students.stream().filter(student -> student.getBrith().get(Calendar.MONTH)+1==(Calendar.getInstance().get(Calendar.MONTH)+2)).forEach(student -> System.out.println(student));
     }
 
 }

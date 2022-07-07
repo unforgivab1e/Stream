@@ -1,6 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 public class Student {
     private int number;
@@ -8,13 +8,8 @@ public class Student {
 
 
     private String name;
-    private String brith;
+    private Calendar brith;
     private String gender;
-
-
-    public int getNumber() {
-        return number;
-    }
 
 
     public String getName() {
@@ -23,7 +18,7 @@ public class Student {
 
 
 
-    public String getBrith() {
+    public Calendar getBrith() {
         return brith;
     }
 
@@ -35,20 +30,22 @@ public class Student {
 
 
 
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public Student(int number, String name, String brith, String gender) throws ParseException {
         this.number = number;
         this.name = name;
        //this.brith=new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(brith));
-        this.brith=brith;
         this.gender = gender;
+        Calendar date = Calendar.getInstance();
+        date.setTime(dateFormat.parse(brith));
+        this.brith=date;
     }
     @Override
     public String toString() {
         return "Student{" +
                 "number=" + number +
                 ", name='" + name + '\'' +
-                ", brith='" + brith + '\'' +
+                ", brith='" + dateFormat.format(brith.getTime()) + '\'' +
                 ", gender='" + gender + '\'' +
                 '}';
     }
