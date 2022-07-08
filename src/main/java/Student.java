@@ -1,6 +1,10 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Student {
     private int number;
@@ -8,7 +12,7 @@ public class Student {
 
 
     private String name;
-    private Calendar brith;
+    private LocalDate brith;
     private String gender;
 
 
@@ -18,7 +22,7 @@ public class Student {
 
 
 
-    public Calendar getBrith() {
+    public LocalDate getBrith() {
         return brith;
     }
 
@@ -30,22 +34,22 @@ public class Student {
 
 
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public Student(int number, String name, String brith, String gender) throws ParseException {
         this.number = number;
         this.name = name;
        //this.brith=new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(brith));
         this.gender = gender;
-        Calendar date = Calendar.getInstance();
-        date.setTime(dateFormat.parse(brith));
-        this.brith=date;
+       /* Calendar date = Calendar.getInstance();
+        date.setTime(dateFormat.parse(brith));*/
+        this.brith=LocalDate.parse(brith, DateTimeFormatter.ofPattern("yyyy-MM-dd"));;
     }
     @Override
     public String toString() {
         return "Student{" +
                 "number=" + number +
                 ", name='" + name + '\'' +
-                ", brith='" + dateFormat.format(brith.getTime()) + '\'' +
+                ", brith='" + brith + '\'' +
                 ", gender='" + gender + '\'' +
                 '}';
     }

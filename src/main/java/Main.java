@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        System.out.println(Calendar.getInstance().get(Calendar.MONTH)+2);
+        System.out.println(LocalDate.now());
         ArrayList<Student> students=new ArrayList<>();
         students.add(new Student(1,"赵雷","1990-01-01","男"));
         students.add(new Student(2,"钱电","1990-12-21","男"));
@@ -30,14 +31,14 @@ public class Main {
         students.stream().filter(student -> student.getName().contains("风")).collect(Collectors.toList()).forEach(student -> System.out.println(student) );
         System.out.println("------------------------------------");
 
-        students.stream().filter(student -> student.getBrith().get(Calendar.YEAR)==1990).collect(Collectors.toList()).forEach(student -> System.out.println(student));
+        students.stream().filter(student -> student.getBrith().getYear()==1990).collect(Collectors.toList()).forEach(student -> System.out.println(student));
         System.out.println("------------------------------------");
 
-        students.stream().collect(Collectors.groupingBy(student -> student.getBrith().get(Calendar.YEAR), Collectors.counting())).forEach((s, aLong) -> System.out.print(s+"数量是"+aLong+" "));
+        students.stream().collect(Collectors.groupingBy(student -> student.getBrith().getYear(), Collectors.counting())).forEach((s, aLong) -> System.out.print(s+"数量是"+aLong+" "));
         System.out.println("");
         System.out.println("--------------------------------------");
 
-        students.stream().filter(student -> student.getBrith().get(Calendar.MONTH)+1==(Calendar.getInstance().get(Calendar.MONTH)+2)).forEach(student -> System.out.println(student));
+        students.stream().filter(student -> student.getBrith().getMonthValue()==(LocalDate.now().getMonthValue()+1)).forEach(student -> System.out.println(student));
     }
 
 }
